@@ -11,11 +11,10 @@ COPY . .
 RUN buildDeps="build-essential \
     automake \
     libtool \
-    ca-certificates \
-    git" \
+    git \
+    ca-certificates" \
     && apt-get update \
     && apt-get install -y --no-install-recommends $buildDeps
-RUN git submodule update --init
 RUN autoreconf -fi
 RUN ./configure --with-oniguruma=builtin --disable-maintainer-mode
 RUN make -j$(nproc) \
